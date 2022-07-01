@@ -1,0 +1,52 @@
+<div class="card mr-0 mt-6">
+  <header class="card-header" (click)="openCloseModal()">
+    <a class="card-header-title">
+      {{offer.designation}} - {{offer.contract}}
+    </a>
+  </header>
+  <div class="card-content" (click)="openCloseModal()">
+    <div class="content">
+      <h5>Description :</h5>
+      <br>
+      <p>{{offer.description | offer:[200, '...'] }}</p>
+      <div *ngIf="offer.salary !== undefined">
+        <br>
+        <h5>Salary info :</h5>
+        <br>
+        <p>{{offer.salary}}</p>
+      </div>
+    </div>
+  </div>
+  <footer class="card-footer">
+    <button class="card-footer-item button is-primary is-outlined mx-6 my-2"
+      (click)="favoriteUnFavoriteOffer()">{{!offer.isFavorite ? 'Add favorite' : 'Del favorite'}}</button>
+    <button class="card-footer-item button is-primary is-outlined mx-6 my-2"
+      (click)="openCloseModal()">{{!offer.isApply ? 'Apply' : 'No longer apply'}}</button>
+      <button *ngIf="!offer.isApply && !offer.isFavorite" class="card-footer-item button is-primary is-outlined mx-6 my-2"
+      (click)="blacklistedUnBlacklisteOffer()">
+      {{!offer.isBlacklisted ? 'Blacklist' : 'Unblacklist'}}</button>
+  </footer>
+</div>
+
+<div class="modal" [ngClass]="offer.isOpen ? 'is-active' : ''">
+  <div class="modal-background" (click)="openCloseModal()"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">{{offer.designation}} - {{offer.contract}}</p>
+      <button class="delete" aria-label="close" (click)="openCloseModal()"></button>
+    </header>
+    <section class="modal-card-body">
+      <h5>Description :</h5>
+      <br>
+      <p>{{offer.description}}</p>
+      <br>
+      <h5>Salary info :</h5>
+      <br>
+      <p>{{offer.salary}}</p>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success" (click)="applyOffer()">{{!offer.isApply ? 'Apply' : 'No longer apply'}}</button>
+      <button class="button" (click)="openCloseModal()">Cancel</button>
+    </footer>
+  </div>
+</div>
