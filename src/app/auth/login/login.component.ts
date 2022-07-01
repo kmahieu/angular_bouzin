@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-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
 export class LoginComponent implements OnInit {
 
   email: string = "";
